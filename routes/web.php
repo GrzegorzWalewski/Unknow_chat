@@ -12,3 +12,7 @@
 */
 
 Route::get('/','RoomsController@index');
+
+Route::post('/chat','RoomsController@store');
+
+Route::get('/chat','RoomsController@show');
