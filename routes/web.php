@@ -16,3 +16,9 @@ Route::get('/','RoomsController@index');
 Route::post('/chat','RoomsController@store');
 
 Route::get('/chat','RoomsController@show');
+
+Route::get('/new','RoomsController@get_new');
+
+Route::get('/setonline','RoomsController@setOnline');
+
+Route::get('/setoffline','RoomsController@setOffline');

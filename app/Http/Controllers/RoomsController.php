@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Chat\Room;
 use Chat\User;
 use Chat\Message;
+use Chat\Online;
 
 class RoomsController extends Controller
 {
@@ -39,5 +40,26 @@ class RoomsController extends Controller
     	$room = request('room');
     	$messages = Message::where('room_id',$room)->take(15)->latest()->get();
     	return view('show',compact('room','messages'));
+    }
+    public function get_new()//get new messages if there are any (for ajax)
+    {
+        $room = request('room');
+        $message = request('message');
+        $messages = Message::where('room_id',$room)->where('id',">",$message)->latest()->get();
+        if($messages->first())
+        {
+            return view('ajax.new',compact('messages'));
+        }
+    }
+    public function setOnline()
+    {
+        $nick = request('name');
+        $room = request('room');
+        Online::setOnline($nick,$room);
+    }
+    public function setOffline()
+    {
+        $room = request('room');
+        Online::setOffline($room);
     }
 }

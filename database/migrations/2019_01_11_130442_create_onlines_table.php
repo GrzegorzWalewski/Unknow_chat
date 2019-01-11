@@ -15,7 +15,7 @@ class CreateOnlinesTable extends Migration
     {
         Schema::create('onlines', function (Blueprint $table) {
             $table->integer('userid');
-            $table->integer('roomid');
+            $table->string('roomid');
             $table->timestamps();
         });
     }

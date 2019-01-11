@@ -3,24 +3,39 @@
 	<div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
-			<p>ROOMROOM</p>
+			<p id="room_name">{{ $room }}</p>
 		</div>
 	</div>
 	<div class="content">
 		<div class="contact-profile text-center">
-			<p>NICKNICK</p>
+			<p id="username">{{ session('username') }}</p>
 		</div>
 		<div class="messages">
-			<ul class="width_100">
-				<li class="replies">
-					<p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-				</li>
+			<ul id="messages" class="width_100">
+				@if($messages->first)
+					@foreach($messages as $message)
+						<li class="sent">
+							@if($message->user->name == session('username'))
+								<p>You</p>
+							@else
+								<p>{{ $message->user->name }}</p>
+							@endif
+						</li>
+						<li class="replies">
+							<p id="{{ $message->id }}">{{ $message->content }}</p>
+						</li>
+					@endforeach
+				@else
+					<li class="replies">
+						<p>Welcome to new chat :D</p>
+					</li>
+				@endif
 			</ul>
 		</div>
 		<div class="message-input">
 			<div class="wrap">
 			<input type="text" placeholder="Write your message..." />
-			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+			<button id="send" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
 		</div>
 	</div>
