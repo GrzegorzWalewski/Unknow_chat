@@ -16,13 +16,13 @@ class RoomsController extends Controller
     public function store(Request $request)
     {
     	$request->validate([
-    		'room_id' => 'required',
+    		'room_id' => 'required|max:20',
     		'name'	  => 'required|min:3|max:15'
     	]);
-    	if(Room::where('name',request('room_id'))->count()!=1)
+    	if(Room::where('id',request('room_id'))->count()!=1)
     	{
     		Room::Create([
-    			'name' => request('room_id')
+    			'id' => request('room_id')
     		]);
     	}
     	if(User::where('name',request('name'))->count()!=1)
@@ -37,8 +37,7 @@ class RoomsController extends Controller
     public function show()
     {
     	$room = request('room');
-    	$roomData = Room::where('name',$room)->first();
-    	$messages = Message::where('room_id',$roomData->id)->take(15)->latest()->get();
-    	return view('show',compact('roomData','messages'));
+    	$messages = Message::where('room_id',$room)->take(15)->latest()->get();
+    	return view('show',compact('room','messages'));
     }
 }

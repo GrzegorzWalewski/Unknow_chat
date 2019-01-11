@@ -4,7 +4,7 @@ namespace Chat;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class Online extends Model
 {
-    protected $fillable = ['id'];
+    //
 }
