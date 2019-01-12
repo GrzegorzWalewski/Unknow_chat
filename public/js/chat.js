@@ -86,6 +86,8 @@ function setOnline(username)
 {
 	//set user status online for 2min
 	clearTimeout(onlineSchedule);
+	var statusClassList = userStatus.classList;
+	userStatus.classList = String(statusClassList).replace(" offline", "");
 	$.ajax({url: "/setonline?name="+username+"&room="+roomId});
 	onlineSchedule = setTimeout(function(){ setOffline(roomId) }, 120000);
 }
