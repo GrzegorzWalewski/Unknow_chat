@@ -37,8 +37,9 @@ class RoomsController extends Controller
     }
     public function show()
     {
-    	$room = request('room');
-    	$messages = Message::where('room_id',$room)->take(15)->latest()->get();
+    	$room = Room::where('id',request('room'))->first();
+    	$messages = Message::where('room_id',request('room'))->latest()->take(15)->get();
+        $messages = $messages->reverse();
     	return view('show',compact('room','messages'));
     }
     public function get_new()//get new messages if there are any (for ajax)

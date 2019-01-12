@@ -22,3 +22,9 @@ Route::get('/new','RoomsController@get_new');
 Route::get('/setonline','RoomsController@setOnline');
 
 Route::get('/setoffline','RoomsController@setOffline');
+
+Route::get('/store','MessagesController@store');
+
+Route::get('/get','OnlinesController@get');
+
+Route::get('/update','OnlinesController@update');

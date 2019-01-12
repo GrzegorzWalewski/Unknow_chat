@@ -3,14 +3,16 @@
 	<div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
-			<p id="room_name">{{ $room }}</p>
+			<p id="room_name">{{ $room->id }}</p>
+			<ul id="online_list" class="width_100">
+			</ul>
 		</div>
 	</div>
 	<div class="content">
 		<div class="contact-profile text-center">
-			<p id="username">{{ session('username') }}</p>
+			<p id="username">{{ session('username') }} <span id="status" class="dot"></span></p>
 		</div>
-		<div class="messages">
+		<div id="message_div" class="messages">
 			<ul id="messages" class="width_100">
 				@if($messages->first)
 					@foreach($messages as $message)
@@ -34,7 +36,7 @@
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<input type="text" placeholder="Write your message..." />
+			<input id="input" type="text" placeholder="Write your message..." />
 			<button id="send" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
 		</div>
